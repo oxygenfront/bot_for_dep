@@ -1,33 +1,26 @@
 import { Module } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
 import { PrismaModule } from "nestjs-prisma";
-import { AppService } from "./app.service";
-import { TelegrafService } from "./telegraf.service";
-import { TelegramModule } from "./telegram.module";
-import { TelegramUpdate } from "./telegram.update";
-import { TelegramUtils } from "./telegram.utils";
+import { TelegrafService } from "./telegram/telegraf.service";
+import { TelegramModule } from "./telegram/telegram.module";
+import { TelegramUpdate } from "./telegram/telegram.update";
+import { TelegramUtils } from "./telegram/telegram.utils";
+import { UserModule } from "./user/user.module";
+import { UserTestModule } from "./user-test/user-test.module";
 
 @Module({
-    imports: [
-        ConfigModule,
-        PrismaModule.forRoot({
-            isGlobal: true,
-            prismaServiceOptions: {
-                explicitConnect: true,
-            },
-        }),
-        TelegramModule,
-        // TelegrafModule.forRootAsync({
-        //     imports: [ ConfigModule ],
-        //     inject: [ ConfigService ],
-        //     useFactory: ( configService: ConfigService ) => {
-        //         return {
-        //             token: configService.get<string>("TELEGRAM_TOKEN") || "",
-        //         };
-        //     },
-        // }),
-    ],
-    providers: [ AppService, TelegramUpdate, TelegrafService, TelegramUtils ],
+	imports: [
+		ConfigModule,
+		PrismaModule.forRoot({
+			isGlobal: true,
+			prismaServiceOptions: {
+				explicitConnect: true,
+			},
+		}),
+		TelegramModule,
+		UserTestModule,
+		UserModule,
+	],
+	providers: [TelegramUpdate, TelegrafService, TelegramUtils],
 })
-export class AppModule {
-}
+export class AppModule {}

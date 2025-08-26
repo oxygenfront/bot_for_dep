@@ -5,7 +5,7 @@ import { TelegramUpdate } from './telegram.update'
 import { TelegramUtils } from './telegram.utils'
 import {
     TelegramWebhookController
-} from './webhooks/telegram-webhook.controller'
+} from '../webhooks/telegram-webhook.controller'
 
 @Module({
     imports: [

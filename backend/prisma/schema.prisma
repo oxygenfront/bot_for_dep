@@ -8,6 +8,24 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum ApproveUserStatus {
+  needTesting
+  pending
+  rejected
+  approved
+}
+
 model User {
-  id BigInt @unique
+  id          BigInt            @id @unique
+  username    String            @unique
+  approveUser ApproveUserStatus
+  UserTest    UserTest[]
+}
+
+model UserTest {
+  id        BigInt   @id @default(autoincrement())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    BigInt
+  answers   Json
+  createdAt DateTime @default(now())
 }

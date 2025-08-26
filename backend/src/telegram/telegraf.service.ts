@@ -4,7 +4,6 @@ import { Telegraf } from "telegraf";
 
 @Injectable()
 export class TelegrafService implements OnModuleInit {
-    private readonly logger = new Logger(TelegrafService.name);
 
     constructor( @InjectBot() private readonly bot: Telegraf ) {
     }
