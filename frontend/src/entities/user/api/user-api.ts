@@ -21,6 +21,18 @@ export const userApi = rootApi.injectEndpoints({
 			},
 		}),
 
+		updateUser: builder.mutation<any, {}>({
+			query: () => ({
+				url: "/user",
+				method: "PATCH",
+			}),
+		}),
+
+		getUsers: builder.query<any, string>({
+			query: (search) => `/user?search=${search}`,
+			providesTags: [API_TAGS.User],
+		}),
+
 		getUser: builder.query<any, string | number>({
 			query: (userId) => `/user?userId=${userId}`,
 			providesTags: [API_TAGS.User],
@@ -40,4 +52,9 @@ export const userApi = rootApi.injectEndpoints({
 	}),
 });
 
-export const { useCreateUserMutation, useGetUserQuery } = userApi;
+export const {
+	useCreateUserMutation,
+	useGetUserQuery,
+	useGetUsersQuery,
+	useUpdateUserMutation,
+} = userApi;

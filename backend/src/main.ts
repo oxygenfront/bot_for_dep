@@ -3,10 +3,10 @@ import { AppModule } from "./app.module";
 import { BigIntInterceptor } from "./common/interceptors";
 
 async function bootstrap() {
-	const app = await NestFactory.create(AppModule);
-
-	app.enableCors({
-		origin: ["http://localhost:5678"],
+	const app = await NestFactory.create(AppModule, {
+		cors: {
+			origin: true,
+		},
 	});
 
 	app.useGlobalInterceptors(new BigIntInterceptor());

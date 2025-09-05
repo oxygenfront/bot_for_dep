@@ -1,44 +1,32 @@
-export const StepNavigation = ({
-	step,
-	setStep,
-	totalSteps,
-	handleSubmit,
-	onSubmit,
-}: any) => {
-	const isLastStep = step >= totalSteps - 1;
-
-	const baseBtn =
-		"px-5 py-2 rounded-md font-medium transition-all duration-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2";
-
+export const StepNavigation = ({ step, setStep, totalSteps }: any) => {
+	const isLast = step === totalSteps - 1;
 	return (
-		<div className="flex gap-3 mt-4">
-			{step > 0 && (
-				<button
-					type="button"
-					onClick={() => setStep((s: number) => s - 1)}
-					className={`${baseBtn} bg-gray-200 text-gray-700 hover:bg-gray-300 focus:ring-gray-400`}
-				>
-					Назад
-				</button>
-			)}
-
-			{!isLastStep ? (
+		<div className="flex justify-between mt-4">
+			{step > 0 ? (
 				<button
 					type="button"
 					onClick={() => setStep((s: number) => s + 1)}
-					className={`${baseBtn} bg-blue-500 text-white hover:bg-blue-600 focus:ring-blue-400`}
+					className="px-5 py-2 rounded-lg bg-gray-200 text-gray-700 hover:bg-gray-300 transition-shadow shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-400"
 				>
-					Далее
+					Назад
 				</button>
 			) : (
-				<button
-					type="button"
-					onClick={handleSubmit(onSubmit)}
-					className={`${baseBtn} bg-green-500 text-white hover:bg-green-600 focus:ring-green-400`}
-				>
-					Отправить
-				</button>
+				<span />
 			)}
+
+			<button
+				type={isLast ? "submit" : "button"}
+				onClick={() => !isLast && setStep((s: number) => s + 1)}
+				className={`px-5 py-2 rounded-lg font-medium transition-all duration-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2
+          ${
+						isLast
+							? "bg-green-500 text-white hover:bg-green-600 focus:ring-green-400"
+							: "bg-blue-500 text-white hover:bg-blue-600 focus:ring-blue-400"
+					}
+        `}
+			>
+				{isLast ? "Отправить" : "Далее"}
+			</button>
 		</div>
 	);
 };

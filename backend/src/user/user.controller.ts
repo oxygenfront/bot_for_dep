@@ -1,11 +1,4 @@
-import {
-	Body,
-	Controller,
-	Get,
-	ParseIntPipe,
-	Post,
-	Query,
-} from "@nestjs/common";
+import { Body, Controller, Get, Post, Query } from "@nestjs/common";
 import { UserService } from "./user.service";
 
 @Controller("user")
@@ -18,7 +11,10 @@ export class UserController {
 	}
 
 	@Get()
-	async findByUser(@Query("userId") userId: string) {
-		return this.service.findByUserId(BigInt(userId));
+	async find(@Query("userId") userId: string, @Query("search") search: string) {
+		if (userId) {
+			return this.service.findByUserId(BigInt(userId));
+		}
+		return this.service.findAll(search);
 	}
 }

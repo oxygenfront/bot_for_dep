@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
+import { DynamicRoute } from "@/app/dynamicRoute";
 import { BaseLayout as App } from "@/app/layout";
-import { TestForm } from "@/features/form/ui/TestForm";
+import { ManagementPage, UserManagementPage } from "@/pages/Management";
 import { PATH } from "@/shared/constants";
 
 export const router = createBrowserRouter([
@@ -10,42 +11,16 @@ export const router = createBrowserRouter([
 		children: [
 			{
 				path: "/",
-				element: <TestForm />,
+				element: <DynamicRoute />,
+			},
+			{
+				path: "/management",
+				element: <ManagementPage />,
+			},
+			{
+				path: "management/:userId",
+				element: <UserManagementPage />,
 			},
 		],
-		// children: [
-		//     {
-		//         path: PATH.BASE,
-		//         element: <ChaptersLinksBlock />,
-		//     },
-		//     {
-		//         path: PATH.WARRANTOR,
-		//         element: <WarrantorPage />,
-		//     },
-		//     {
-		//         path: PATH.CHAPTER,
-		//         element: <ChapterPage />,
-		//     },
-		//     {
-		//         path: PATH.THEME,
-		//         element: <ThemePage />,
-		//     },
-		//     {
-		//         path: PATH.PROFILE,
-		//         element: <Profile />,
-		//     },
-		//     {
-		//         path: PATH.ALL_CHATS,
-		//         element: <AllChatsPages />,
-		//     },
-		//     {
-		//         path: PATH.CHAT,
-		//         element: <Chat />,
-		//     },
-		//     {
-		//         path: PATH.ADMIN,
-		//         element: <Admin />,
-		//     },
-		// ],
 	},
 ]);

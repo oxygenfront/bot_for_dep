@@ -1,28 +1,24 @@
-import type { FC } from "react";
-
 interface ProgressBarProps {
-	step: number; // текущий шаг (0-индексация)
-	totalSteps: number; // общее количество шагов
+	step: number;
+	totalSteps: number;
 	setStep: (step: number) => void;
 }
 
-export const ProgressBar: FC<ProgressBarProps> = ({
+export const ProgressBar = ({
 	step,
 	totalSteps,
 	setStep,
-}) => {
-	const stepsArray = Array.from({ length: totalSteps });
-
+}: ProgressBarProps) => {
 	return (
 		<div className="w-full flex gap-2">
-			{stepsArray.map((_, index) => (
+			{Array.from({ length: totalSteps }).map((_, idx) => (
 				<button
-					onClick={() => setStep(index)}
-					type="button"
 					// biome-ignore lint/suspicious/noArrayIndexKey: <>
-					key={index}
+					key={idx}
+					type="button"
+					onClick={() => setStep(idx)}
 					className={`flex-1 h-2 rounded-full transition-colors duration-300 cursor-pointer
-            ${index <= step ? "bg-blue-500" : "bg-gray-200"}
+            ${idx <= step ? "bg-indigo-500" : "bg-gray-700"}
           `}
 				/>
 			))}

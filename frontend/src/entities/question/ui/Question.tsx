@@ -1,40 +1,50 @@
-import { Controller } from "react-hook-form";
+import { type Control, Controller } from "react-hook-form";
 
-export const QuestionField = ({ control, name, label }: any) => (
-	<div className="field w-full">
-		<Controller
-			name={name}
-			control={control}
-			render={({ field }) => (
-				<div className="flex flex-col w-full gap-1">
-					<label
-						htmlFor={name}
-						className="text-sm font-medium text-gray-700 transition-colors duration-300 peer-focus:text-blue-500"
-					>
-						{label}
-					</label>
-					<input
-						id={name}
-						{...field}
-						placeholder="Ваш ответ"
-						className="
-                          peer
-                          px-3 py-2
-                          border border-gray-300
-                          rounded-md
-                          bg-white
-                          text-gray-900
-                          placeholder-gray-400
-                          shadow-sm
-                          focus:border-blue-500
-                          focus:ring-2 focus:ring-blue-300
-                          focus:outline-none
-                          transition-all duration-300
-                          hover:border-blue-400
-                        "
-					/>
-				</div>
-			)}
-		/>
-	</div>
+interface QuestionFieldProps {
+	control: Control<any>;
+	name: string;
+	label: string;
+	hint?: string;
+}
+
+export const QuestionField = ({
+	control,
+	name,
+	label,
+	hint,
+}: QuestionFieldProps) => (
+	<Controller
+		name={name}
+		control={control}
+		render={({ field }) => (
+			<div className="flex flex-col gap-1">
+				<label
+					htmlFor={name}
+					className="text-sm font-medium text-gray-200 transition-colors peer-focus:text-indigo-500"
+				>
+					{label}
+				</label>
+				<input
+					id={name}
+					{...field}
+					placeholder={hint || "Ваш ответ"}
+					className="
+            peer
+            w-full
+            px-4 py-2
+            border border-gray-700
+            rounded-lg
+          bg-gray-800
+          text-gray-100
+          placeholder-gray-500
+            shadow-sm
+            focus:border-indigo-500 focus:ring-2 focus:ring-indigo-300
+            outline-none
+            transition-all duration-300
+            hover:border-indigo-400
+          "
+				/>
+			</div>
+		)}
+	/>
 );
